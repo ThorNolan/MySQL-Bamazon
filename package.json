@@ -1,0 +1,24 @@
+{
+  "name": "MySQL-Bamazon",
+  "version": "1.0.0",
+  "description": "A CLI storefront app that uses a MySQL database on the back-end to store its product information.",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThorNolan/MySQL-Bamazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThorNolan/MySQL-Bamazon/issues"
+  },
+  "homepage": "https://github.com/ThorNolan/MySQL-Bamazon#readme",
+  "dependencies": {
+    "inquirer": "^6.2.2",
+    "mysql": "^2.16.0"
+  }
+}

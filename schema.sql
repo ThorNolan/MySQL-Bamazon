@@ -1,7 +1,7 @@
 -- set-up for my Bamazon database --
-DROP DATABASE IF EXISTS Bamazon_db;
-CREATE DATABASE Bamazon_db;
-USE Bamazon_db;
+DROP DATABASE IF EXISTS Bamazon_DB;
+CREATE DATABASE Bamazon_DB;
+USE Bamazon_DB;
 
 -- table to store my products and serve as an inventory --
 CREATE TABLE products (
