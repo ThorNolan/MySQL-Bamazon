@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 // function to retrieve and display all products in the bamazon products table
 function displayProducts() {
 
-    console.log("Here's what we got: \n")
+    console.log("Welcome to Bamazon, friendo. Here's what we got: \n")
 
     connection.query(
         "SELECT * FROM products", 
@@ -99,7 +99,34 @@ function promptUser() {
 				console.log("Please enter a valid item ID!");
 				displayProducts();
 			} else {
+                // store relevant product data in a local variable
+                var productInfo = data[0];
 
+                // if user's quantity input is equal to or less than the stock of the item
+                if (quantity <= productInfo.stock_quantity) {
+                    // query and update my database to adjust stock
+                    connection.query(
+                        "UPDATE products SET stock_quantity = " + (productInfo.stock_quantity - quantity) + " WHERE ?", 
+                        {item_id: itemID},
+
+                    function(err, data) {
+						if (err) throw err;
+
+                        // display order information to my user in the console
+                        console.log("Order placed for (" + quantity + ") " + productInfo.product_name + " ✔");
+                        console.log("Your total: $" + productInfo.price * quantity);
+						console.log("\n=============================================================\n");
+
+						// end connection to my database
+						connection.end();
+					})
+
+                } else {
+                    console.log("\nSorry, we don't have enough of those in stock to fill your order. Try a different amount!");
+                    console.log("\n=============================================================\n");
+
+					displayProducts();
+                }   
             }    
         });    
     });    
