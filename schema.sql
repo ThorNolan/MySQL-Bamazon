@@ -15,3 +15,4 @@ CREATE TABLE products (
 
 -- Populate my table with products --
 INSERT INTO products (product_name, department_name, price, stock_quantity)
+VALUES ("Ruby", "Jewellery", 800, 7)
