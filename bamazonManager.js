@@ -25,28 +25,28 @@ function managerPrompt() {
         type: "rawlist",
         message: "Ok big shot, what'll it be now that you're the manager? 📊 ",
         choices: [
-          "View products for sale $",
-          "View low inventory -",
-          "Restock items +",
-          "Add a new product ^"
+          "View products for sale 👁‍",
+          "View low inventory ⚠️",
+          "Restock items ➕",
+          "Add a new product 🆕"
         ]
     })
     .then(function(userChoice) {
         // ...and call further functions depending on their choice
         switch (userChoice.action) {
-            case "View products for sale $":
+            case "View products for sale 👁‍":
             displayProducts();
             break;
     
-            case "View low inventory -":
+            case "View low inventory ⚠️":
             viewLowStock();
             break;
     
-            case "Restock items +":
+            case "Restock items ➕":
             addStock();
             break;
     
-            case "Add a new product ^":
+            case "Add a new product 🆕":
             addNewProduct();
             break;
 
@@ -62,7 +62,7 @@ function managerPrompt() {
 // function to retrieve and display all products in the bamazon products table
 function displayProducts() {
 
-    console.log("Here's our current inventory, manager. Everything looking good? \n")
+    console.log("\nHere's our current inventory, manager. Everything looking good? 👌\n")
 
     connection.query(
         "SELECT * FROM products", 
@@ -79,12 +79,12 @@ function displayProducts() {
 			logString += "Product: " + data[i].product_name + "  ||  ";
 			logString += "Department: " + data[i].department_name + "  ||  ";
             logString += "Price: $" + data[i].price + " || ";
-            logString += "Stock: " + data[i].stock_quantity + "\n";
+            logString += "Stock: " + data[i].stock_quantity + " || ";
 
             // log the string once it's been completed
             console.log(logString);
         }
-        console.log("==============================================================================\n")
+        console.log("\n==============💸================💸=================💸=================💸==========\n");
         // call my manager prompt function so user can choose another action
         managerPrompt();
     });
@@ -93,6 +93,31 @@ function displayProducts() {
 // function that allows manager to see all products with less than 5 in stock
 function viewLowStock() {
 
+    connection.query(
+        "SELECT * FROM products WHERE stock_quantity < 5", 
+    function(err, data) {
+        // account for potential errors
+		if (err) throw err;
+
+		console.log("⚠️  5 or less of these HOT items remaining, they're FLYING off the shelves ⚠️\n");
+
+		var logString = "";
+		for (var i = 0; i < data.length; i++) {
+			logString = "";
+			logString += "Item ID: " + data[i].item_id + "  ||  ";
+			logString += "Product: " + data[i].product_name + "  ||  ";
+			logString += "Department: " + data[i].department_name + "  ||  ";
+            logString += "Price: $" + data[i].price + " || ";
+            logString += "Stock: " + data[i].stock_quantity + " || ";
+
+			console.log(logString);
+		}
+
+        console.log("\n==============💸================💸=================💸=================💸==========\n");
+
+		// call managerPrompt function so that user can choose another option
+		managerPrompt();
+	})
 }
 
 

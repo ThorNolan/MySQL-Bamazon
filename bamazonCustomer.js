@@ -45,7 +45,7 @@ function displayProducts() {
             // log the string once it's been completed
             console.log(logString);
         }
-        console.log("==============================================================================\n")
+        console.log("\n==============💸================💸=================💸=================💸==========\n")
         // call my prompt function to begin asking user which item they would like to buy
         promptUser();
     });
@@ -113,16 +113,16 @@ function promptUser() {
 						if (err) throw err;
 
                         // display order information to my user in the console
-                        console.log("Order placed for (" + quantity + ") " + productInfo.product_name + " ✔");
-                        console.log("Your total: $" + productInfo.price * quantity);
-						console.log("\n=============================================================\n");
+                        console.log("Order placed for (" + quantity + ") " + productInfo.product_name + " ✔️");
+                        console.log("Your total: 💲 " + productInfo.price * quantity);
+                        console.log("\n==============💸================💸=================💸=================💸==========\n")
 
 						// end connection to my database
 						connection.end();
 					})
 
                 } else {
-                    console.log("\n❌ Sorry, we don't have enough of those in stock to complete your order. Try a different amount! ❌");
+                    console.log("\n⚠️  Sorry, we don't have enough of that item in stock to complete your order. Try a different amount! ⚠️");
                     console.log("\n=============================================================\n");
 
                     // run my prompt again from the beginning so user can enter a different amount
