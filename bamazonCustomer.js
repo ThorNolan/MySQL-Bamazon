@@ -40,7 +40,7 @@ function displayProducts() {
 			logString += "Product: " + data[i].product_name + "  ||  ";
 			logString += "Department: " + data[i].department_name + "  ||  ";
             logString += "Price: $" + data[i].price + " || ";
-            logString += "Stock: " + data[i].stock_quantity + "\n";
+            logString += "Stock: " + data[i].stock_quantity + " || ";
 
             // log the string once it's been completed
             console.log(logString);

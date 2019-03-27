@@ -4,20 +4,39 @@ A command line interface storefront app I made for my full-stack coding bootcamp
 
 ## How to Deploy the App:
 
-This app requires MySQL database in order to run. If you do not have MySQL already downloaded, you will need to download it before proceeding ([download can be found here](https://dev.mysql.com/doc/refman/5.6/en/installing.html)). Once you have a database and have established a connection to it, you can run the code found in [schema.sql](schema.sql) in your MySQL workbench to populate your database with products. Now you can move on to the next steps:
+This app requires a functional MySQL database to connect to in order to run. If you do not have MySQL already downloaded, you will need to download it before proceeding ([download can be found here](https://dev.mysql.com/doc/refman/5.6/en/installing.html)). Once you have a database and have established a connection to it, you can run the code found in [schema.sql](schema.sql) in your MySQL workbench to populate your database with products. The app also relies on Node.js for it's server environment, which can be downloaded [here](https://nodejs.org/en/). Now you're ready to move on to the next steps:
 
 1. Clone this repository down to your machine: https://github.com/ThorNolan/MySQL-Bamazon.git
    
 2. Run `npm install` in your command line to download the required packages
    
-3. At the command prompt, enter `node bamazonCustomer.js`, which will bring up the prompt asking you what you would like to do.
+3. Run either the customer or manager JavaScript file ⤵️
+
+
+## Two options: Customer and Manager Views
+
+**_Customer view:_** 
+
+1. At the command prompt, enter `node bamazonCustomer.js`, which will bring up the prompt asking you what you would like to do.
+
+2. Customers can view all available products, and choose which one they would like to buy. To do this, they will be prompted to enter the ID number of the item and the quantity.
+
+3. If they enter a number higher than the remaining stock of the product, they will be prompted to enter a different amount.
+
+**_Manager view:_** 
+
+1. At the command prompt, enter `node bamazonManager.js`, which will give you a selection of four _managerial_ tasks to choose from.
+   
+2. Managers can view all products currently for sale, view low stock items (anything with less than 5 units remaining in the database), add stock to any existing item, and add an entirely new product into the database.
+   
+3. The database will be updated dynamically based on which choice the user has made, so product stock will be adjusted based on previous actions. 
    
 
 ## Technologies Used:
 
 + Logic for the app was written with **JavaScript**.
   
-+ **MySQL** for database storage and management. 
++ **MySQL** for database storage and manipulation. 
   
 + **Node.JS** for the app's server environment.
   
@@ -25,7 +44,7 @@ This app requires MySQL database in order to run. If you do not have MySQL alrea
 
 ## Bamazon in action: 
 
-![demo gif](/LIRI-Bot-demo.gif "Demo GIF")
+![demo gif]( "Demo GIF")
 
 ## Author
 
