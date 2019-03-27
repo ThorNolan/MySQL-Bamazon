@@ -122,10 +122,11 @@ function promptUser() {
 					})
 
                 } else {
-                    console.log("\nSorry, we don't have enough of those in stock to fill your order. Try a different amount!");
+                    console.log("\nSorry, we don't have enough of those in stock to complete your order. Try a different amount!");
                     console.log("\n=============================================================\n");
 
-					displayProducts();
+                    // run my prompt again from the beginning so user can enter a different amount
+					promptUser();
                 }   
             }    
         });    
