@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 // function to retrieve and display all products in the bamazon products table
 function displayProducts() {
 
-    console.log("Welcome to Bamazon, friendo. Here's what we got: \n")
+    console.log("Welcome to Bamazon, friendo 👋. Here's what we got: \n")
 
     connection.query(
         "SELECT * FROM products", 
@@ -96,7 +96,7 @@ function promptUser() {
 
             // if user fails to enter a number, ask them to try again and reset
             if (data.length === 0) {
-				console.log("Please enter a valid item ID!");
+				console.log("❌ Please enter a valid item ID! ❌ ");
 				displayProducts();
 			} else {
                 // store relevant product data in a local variable
@@ -122,7 +122,7 @@ function promptUser() {
 					})
 
                 } else {
-                    console.log("\nSorry, we don't have enough of those in stock to complete your order. Try a different amount!");
+                    console.log("\n❌ Sorry, we don't have enough of those in stock to complete your order. Try a different amount! ❌");
                     console.log("\n=============================================================\n");
 
                     // run my prompt again from the beginning so user can enter a different amount
