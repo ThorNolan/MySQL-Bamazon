@@ -1,4 +1,4 @@
-MySQL-Bamazon
+MySQL-Bamazon Storefront
 ====================================================
 A command line interface storefront app I made for my full-stack coding bootcamp. It uses a MySQL database on the back-end to store its product information, and relies on the npm [inquirer](https://www.npmjs.com/package/inquirer) package to display prompts and track user choices as well as the [mysql](https://www.npmjs.com/package/mysql) package to establish database connectivity. I also utilized the [cli_table2 package](https://www.npmjs.com/package/cli-table2) to organize the inventory into more readable tables within the command line. 
 
@@ -34,6 +34,10 @@ This app requires a functional MySQL database to connect to in order to run. If 
 3. The database will be updated dynamically based on which choice the user has made, so product stock will be adjusted based on previous actions. 
 
 ![manager demo gif](/manager-demo.gif "Manager view demo GIF")
+
+Adding an entirely new item to the database: 
+
+![manager new item demo gif](/manager-new-item-demo.gif "Manager new item demo GIF")
    
 
 ## Technologies Used:
