@@ -3,6 +3,7 @@
 // require my dependencies
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var Table = require("cli-table2");
 
 // establish connection to my mySQL database
 var connection = mysql.createConnection({
@@ -23,7 +24,7 @@ var connection = mysql.createConnection({
 // function to retrieve and display all products in the bamazon products table
 function displayProducts() {
 
-    console.log("Welcome to Bamazon 👋. Here's everything we have on sale: \n")
+    console.log("\n🌎  Welcome to Bamazon 👋. Here's everything we have on sale: \n")
 
     connection.query(
         "SELECT * FROM products", 
@@ -31,20 +32,21 @@ function displayProducts() {
         // account for potential errors
         if (err) throw err;
 
-        var logString = "";
+        // instantiate a new table to display in the command line
+        var table = new Table({
+            head: ["ITEM ID=", "===========PRODUCT===========", "====DEPARTMENT====", "=PRICE=", "=STOCK="],
+           colWidths: [10, 32, 20, 10, 10]
+        });
 
-        // concatenate the string I'm going to print to the console for each product...
+        // push each item in the database to my table
 		for (var i = 0; i < data.length; i++) {
-			logString = "";
-			logString += "Item ID: " + data[i].item_id + "  ||  ";
-			logString += "Product: " + data[i].product_name + "  ||  ";
-			logString += "Department: " + data[i].department_name + "  ||  ";
-            logString += "Price: $" + data[i].price + " || ";
-            logString += "Stock: " + data[i].stock_quantity + " || ";
 
-            // log the string once it's been completed
-            console.log(logString);
+            table.push([data[i].item_id, data[i].product_name, data[i].department_name, data[i].price, data[i].stock_quantity])
         }
+
+        // console.log the table once it's been completed
+        console.log(table.toString());
+
         console.log("\n==============💸================💸=================💸=================💸==========\n")
         // call my prompt function to begin asking user which item they would like to buy
         promptUser();

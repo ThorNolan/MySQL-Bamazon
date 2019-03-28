@@ -3,6 +3,7 @@
 // require my dependencies
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var Table = require("cli-table2");
 
 // establish connection to my mySQL database
 var connection = mysql.createConnection({
@@ -70,20 +71,21 @@ function displayProducts() {
         // account for potential errors
         if (err) throw err;
 
-        var logString = "";
+        // instantiate a new table to display in the command line
+        var table = new Table({
+            head: ["ITEM ID=", "===========PRODUCT===========", "====DEPARTMENT====", "=PRICE=", "=STOCK="],
+           colWidths: [10, 32, 20, 10, 10]
+        });
 
-        // concatenate the string I'm going to print to the console for each product...
+        // push each item in the database to my table
 		for (var i = 0; i < data.length; i++) {
-			logString = "";
-			logString += "Item ID: " + data[i].item_id + "  ||  ";
-			logString += "Product: " + data[i].product_name + "  ||  ";
-			logString += "Department: " + data[i].department_name + "  ||  ";
-            logString += "Price: $" + data[i].price + " || ";
-            logString += "Stock: " + data[i].stock_quantity + " || ";
 
-            // log the string once it's been completed
-            console.log(logString);
+            table.push([data[i].item_id, data[i].product_name, data[i].department_name, data[i].price, data[i].stock_quantity])
         }
+
+        // console.log the table once it's been completed
+        console.log(table.toString());
+
         console.log("\n==============💸================💸=================💸=================💸==========\n");
         // call my manager prompt function so user can choose another action
         managerPrompt();
@@ -99,19 +101,22 @@ function viewLowStock() {
         // account for potential errors
 		if (err) throw err;
 
-		console.log("⚠️  5 or less of these HOT items remaining, they're FLYING off the shelves ⚠️\n");
+		console.log("\n⚠️  5 or less of these HOT items remaining, they're FLYING off the shelves ⚠️\n");
 
-		var logString = "";
+		// instantiate a new table to display in the command line
+        var table = new Table({
+            head: ["ITEM ID=", "===========PRODUCT===========", "====DEPARTMENT====", "=PRICE=", "=STOCK="],
+           colWidths: [10, 32, 20, 10, 10]
+        });
+
+        // push each item in the database to my table
 		for (var i = 0; i < data.length; i++) {
-			logString = "";
-			logString += "Item ID: " + data[i].item_id + "  ||  ";
-			logString += "Product: " + data[i].product_name + "  ||  ";
-			logString += "Department: " + data[i].department_name + "  ||  ";
-            logString += "Price: $" + data[i].price + " || ";
-            logString += "Stock: " + data[i].stock_quantity + " || ";
 
-			console.log(logString);
-		}
+            table.push([data[i].item_id, data[i].product_name, data[i].department_name, data[i].price, data[i].stock_quantity])
+        }
+
+        // console.log the table once it's been completed
+        console.log(table.toString());
 
         console.log("\n==============💸================💸=================💸=================💸==========\n");
 
@@ -242,7 +247,7 @@ function addNewProduct() {
             console.log("\n🆕  NEW ITEM ADDED: 🆕\n")
             console.log("Product Name: " + input.product_name + "\n" + "Department: " + input.department_name + "\n" + "Price per unit: " + input.price + "\n" + "Number in stock: " + input.stock_quantity + "\n");
 
-            // run managerPromp so user can choose another action
+            // run managerPrompt so user can choose another action
             managerPrompt();
         });
     });

@@ -1,6 +1,6 @@
 MySQL-Bamazon
 ====================================================
-A command line interface storefront app I made for my full-stack coding bootcamp. It uses a MySQL database on the back-end to store its product information, and relies on the npm [inquirer](https://www.npmjs.com/package/inquirer) package to display prompts and track user choices as well as the [mysql](https://www.npmjs.com/package/mysql) package to establish database connectivity. 
+A command line interface storefront app I made for my full-stack coding bootcamp. It uses a MySQL database on the back-end to store its product information, and relies on the npm [inquirer](https://www.npmjs.com/package/inquirer) package to display prompts and track user choices as well as the [mysql](https://www.npmjs.com/package/mysql) package to establish database connectivity. I also utilized the [cli_table2 package](https://www.npmjs.com/package/cli-table2) to organize the inventory into more readable tables within the command line. 
 
 ## How to Deploy the App:
 
@@ -23,6 +23,8 @@ This app requires a functional MySQL database to connect to in order to run. If 
 
 3. If they enter a number higher than the remaining stock of the product, they will be prompted to enter a different amount.
 
+![customer demo gif](/customer-demo.gif "Customer view demo GIF")
+
 **_Manager view:_** 
 
 1. At the command prompt, enter `node bamazonManager.js`, which will give you a selection of four _managerial_ tasks to choose from.
@@ -30,6 +32,8 @@ This app requires a functional MySQL database to connect to in order to run. If 
 2. Managers can view all products currently for sale, view low stock items (anything with less than 5 units remaining in the database), add stock to any existing item, and add an entirely new product into the database.
    
 3. The database will be updated dynamically based on which choice the user has made, so product stock will be adjusted based on previous actions. 
+
+![manager demo gif](/manager-demo.gif "Manager view demo GIF")
    
 
 ## Technologies Used:
@@ -40,11 +44,7 @@ This app requires a functional MySQL database to connect to in order to run. If 
   
 + **Node.JS** for the app's server environment.
   
-+ **NPM** for installation of the packages required by the app, **inquirer** and **mysql**.
-
-## Bamazon in action: 
-
-![demo gif]( "Demo GIF")
++ **NPM** for installation of the packages required by the app, **inquirer**, **mysql**, and **cli_table2**.
 
 ## Author
 
