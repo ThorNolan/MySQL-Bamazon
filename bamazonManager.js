@@ -23,7 +23,7 @@ function managerPrompt() {
     inquirer.prompt({
         name: "action",
         type: "rawlist",
-        message: "Ok big shot, what'll it be now that you're the manager? 📊 ",
+        message: "Alright big shot, what's next on the managers' agenda? 📊 ",
         choices: [
           "View products for sale 👁‍",
           "View low inventory ⚠️",
@@ -119,6 +119,75 @@ function viewLowStock() {
 		managerPrompt();
 	})
 }
+
+// function to add stock to an existing item in the database and update database to reflect new stock
+function addStock() {
+
+    // begin with inquirer prompt to ask for an item ID and how many the manager would like to add to it
+    inquirer.prompt([
+		{
+			type: "input",
+			name: "itemID",
+			message: "Enter the ID number of the item you'd like to restock:",
+			// validate input to make sure user entered a number
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            }
+		},
+		{
+			type: "input",
+			name: "number",
+			message: "How many of that item would you like to add?",
+			validate: function(value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            }
+		}
+	]).then(function(input) {
+
+        var itemID = input.itemID;
+        var number = input.number;
+
+        connection.query(
+            "SELECT * FROM products WHERE ?", 
+            {item_id: itemID}, 
+        function(err, data) {
+            //account for potential errors or incorrect item ID's
+			if (err) throw err;
+
+            if (data.length === 0) {
+                console.log("❌ Please enter a valid item ID! ❌ ");
+                // reset if user entered an invalid item ID
+				addStock();
+
+			} else {
+
+                // store relevant product data in a local variable
+                var productInfo = data[0];
+
+                console.log("Updating...")
+
+                // connect to my database and update it to reflect new values
+                connection.query(
+                    "UPDATE products SET stock_quantity = " + (productInfo.stock_quantity + number) + " WHERE item_id = " + itemID, 
+                    {item_id: itemID}, 
+                function(err, data) {
+                    if (err) throw err;
+
+                    // let the user know that they successfully restocked and show updated numbers
+                    console.log("\nNicely done! The item with an ID of " + itemID + " now has " + (productInfo.stock_quantity + number) + " in stock ✔️\n")
+
+                    managerPrompt();
+                }) 
+            }
+        });       
+    });     
+};
 
 
 // ============================= MAIN PROCESS =====================================

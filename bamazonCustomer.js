@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 // function to retrieve and display all products in the bamazon products table
 function displayProducts() {
 
-    console.log("Welcome to Bamazon, friendo 👋. Here's what we got: \n")
+    console.log("Welcome to Bamazon 👋. Here's everything we have on sale: \n")
 
     connection.query(
         "SELECT * FROM products", 
