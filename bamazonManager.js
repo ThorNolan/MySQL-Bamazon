@@ -135,7 +135,8 @@ function addStock() {
                     return true;
                 }
                 return false;
-            }
+            },
+            filter: Number
 		},
 		{
 			type: "input",
@@ -146,7 +147,8 @@ function addStock() {
                     return true;
                 }
                 return false;
-            }
+            },
+            filter: Number
 		}
 	]).then(function(input) {
 
@@ -170,7 +172,7 @@ function addStock() {
                 // store relevant product data in a local variable
                 var productInfo = data[0];
 
-                console.log("Updating...")
+                console.log("Updating...\n")
 
                 // connect to my database and update it to reflect new values
                 connection.query(
@@ -188,6 +190,63 @@ function addStock() {
         });       
     });     
 };
+
+// function to allow user to add a completely new product and update database to include it
+function addNewProduct() {
+
+    // prompt to get each part of the new item
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "product_name",
+            message: "Product name: "
+        },
+        {
+            type: "input",
+            name: "department_name",
+            message: "Department: "
+        },
+        {
+            type: "input",
+            name: "price",
+            message: "Price per unit: ",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            },
+            filter: Number
+        },
+        {
+            type: "input",
+            name: "stock_quantity",
+            message: "Number in stock: ",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            },
+            filter: Number
+        }
+    ]).then(function(input) {
+
+        // update my database to reflect the addition of the new item
+        connection.query(
+           "INSERT INTO products SET ?",
+           input,
+        function (error, results) {
+            if (error) throw error;
+
+            console.log("\n🆕  NEW ITEM ADDED: 🆕\n")
+            console.log("Product Name: " + input.product_name + "\n" + "Department: " + input.department_name + "\n" + "Price per unit: " + input.price + "\n" + "Number in stock: " + input.stock_quantity + "\n");
+
+            // run managerPromp so user can choose another action
+            managerPrompt();
+        });
+    });
+}
 
 
 // ============================= MAIN PROCESS =====================================

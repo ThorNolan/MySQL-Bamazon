@@ -122,7 +122,7 @@ function promptUser() {
 					})
 
                 } else {
-                    console.log("\n⚠️  Sorry, we don't have enough of that item in stock to complete your order. Try a different amount! ⚠️");
+                    console.log("\n⚠️  Sorry, we don't have enough of that item in stock right now to complete your order. Try a different amount! ⚠️");
                     console.log("\n=============================================================\n");
 
                     // run my prompt again from the beginning so user can enter a different amount
